@@ -22,10 +22,10 @@ global
 	tune.ssl.default-dh-param 1024
 	nbproc 1
 	nbthread {{.NbThread}}
-	ulimit-n 65536
-	maxconn 32000
+	maxconn 262134
 
 defaults
+	option accept-invalid-http-request
 	http-reuse always
 
 userlist controller

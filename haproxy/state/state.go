@@ -12,10 +12,11 @@ type FrontendFilter struct {
 }
 
 type Frontend struct {
-	Frontend  models.Frontend
-	Bind      models.Bind
-	LogTarget *models.LogTarget
-	Filter    *FrontendFilter
+	Frontend         models.Frontend
+	Bind             models.Bind
+	HTTPRequestRules models.HTTPRequestRules
+	LogTarget        *models.LogTarget
+	Filter           *FrontendFilter
 }
 
 type Backend struct {
