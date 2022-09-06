@@ -128,17 +128,20 @@ func CheckEnvironment(dataplaneapiBin, haproxyBin string) error {
 		currVer, e := getVersion(path)
 		if e != nil {
 			err = e
+			return
 		}
 		res, e := compareVersion(currVer, minVer)
 		if e != nil {
 			err = e
+			return
 		}
 		if res < 0 {
 			err = fmt.Errorf("%s version must be > %s, but is: %s", path, minVer, currVer)
+			return
 		}
 	}
 	go ensureVersion(haproxyBin, "2.0")
-	go ensureVersion(dataplaneapiBin, "1.2")
+	go ensureVersion(dataplaneapiBin, "2.1")
 
 	wg.Wait()
 	if err != nil {

@@ -78,12 +78,11 @@ func main() {
 	flag.Parse()
 	if versionFlag != nil && *versionFlag {
 		fmt.Printf("Version: %s ; BuildTime: %s ; GitHash: %s\n", Version, BuildTime, GitHash)
-		status := 0
-		if err := validateRequirements(*dataplaneBin, *haproxyBin); err != nil {
-			fmt.Printf("ERROR: dataplane API / HAProxy dependencies are not satisfied: %s\n", err)
-			status = 4
-		}
-		os.Exit(status)
+		os.Exit(0)
+	}
+	if err := validateRequirements(*dataplaneBin, *haproxyBin); err != nil {
+		fmt.Printf("ERROR: dataplane API / HAProxy dependencies are not satisfied: %s\n", err)
+		os.Exit(4)
 	}
 
 	ll, err := log.ParseLevel(*logLevel)
