@@ -19,7 +19,6 @@ var defaultsHAProxyParams = HAProxyParams{
 	Globals: map[string]string{
 		"stats":                     "timeout 2m",
 		"tune.ssl.default-dh-param": "1024",
-		"nbproc":                    "1",
 		"nbthread":                  fmt.Sprint(runtime.GOMAXPROCS(0)),
 		"ulimit-n":                  "65536",
 		"maxconn":                   "32000",
