@@ -96,8 +96,14 @@ func main() {
 	consulConfig := &api.Config{
 		Address: *consulAddr,
 	}
+	env_token, env_token_exists := os.LookupEnv("CONNECT_CONSUL_TOKEN")
+	if env_token_exists {
+		consulConfig.Token = env_token
+		log.Info("Setting token from env variable CONNECT_CONSUL_TOKEN")
+	}
 	if token != nil {
 		consulConfig.Token = *token
+		log.Info("Setting token from command line")
 	}
 	consulClient, err := api.NewClient(consulConfig)
 	if err != nil {
