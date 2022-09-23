@@ -101,7 +101,7 @@ func main() {
 		consulConfig.Token = env_token
 		log.Info("Setting token from env variable CONNECT_CONSUL_TOKEN")
 	}
-	if token != nil {
+	if *token != "" {
 		consulConfig.Token = *token
 		log.Info("Setting token from command line")
 	}
