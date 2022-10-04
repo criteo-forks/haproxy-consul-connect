@@ -35,34 +35,20 @@ func TestHaproxyConfig(t *testing.T) {
 global
 	master-worker
 	stats socket stats_sock.sock mode 600 level admin expose-fd listeners
-	
 	maxconn 32000
-	
 	nbthread 12
-	
 	stats timeout 2m
-	
 	tune.ssl.default-dh-param 1024
-	
 	ulimit-n 65536
-	
 	with.dots hey.I.have.dots
-	
 	with.spaces hey I have spaces
-	
 
 defaults
-	
 	another abdc
-	
 	http-reuse always
-	
 	multiple key1 value1
-	
 	multiple key2 value2
-	
 	test.with.dots 3
-	
 
 userlist controller
 	user dummy_user insecure-password dummy_pass

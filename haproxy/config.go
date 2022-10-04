@@ -33,14 +33,14 @@ const baseCfgTmpl = `
 global
 	master-worker
 	stats socket {{.SocketPath}} mode 600 level admin expose-fd listeners
-	{{ range $k, $v := .HAProxyParams.Globals}}
+	{{- range $k, $v := .HAProxyParams.Globals}}
 	{{$k}} {{$v}}
-	{{ end }}
+	{{- end }}
 
 defaults
-	{{ range $k, $v := .HAProxyParams.Defaults}}
+	{{- range $k, $v := .HAProxyParams.Defaults}}
 	{{$k}} {{$v}}
-	{{ end }}
+	{{- end }}
 
 userlist controller
 	user {{.DataplaneUser}} insecure-password {{.DataplanePass}}
