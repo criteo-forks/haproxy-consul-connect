@@ -12,10 +12,11 @@ import (
 	"text/template"
 
 	"github.com/haproxytech/haproxy-consul-connect/lib"
+	"github.com/haproxytech/haproxy-consul-connect/utils"
 	log "github.com/sirupsen/logrus"
 )
 
-var defaultsHAProxyParams = HAProxyParams{
+var defaultsHAProxyParams = utils.HAProxyParams{
 	Globals: map[string]string{
 		"stats":                     "timeout 2m",
 		"tune.ssl.default-dh-param": "1024",
@@ -70,7 +71,7 @@ type baseParams struct {
 	SocketPath    string
 	DataplaneUser string
 	DataplanePass string
-	HAProxyParams HAProxyParams
+	HAProxyParams utils.HAProxyParams
 }
 
 type haConfig struct {
@@ -86,7 +87,7 @@ type haConfig struct {
 	LogsSock                string
 }
 
-func newHaConfig(baseDir string, params HAProxyParams, sd *lib.Shutdown) (*haConfig, error) {
+func newHaConfig(baseDir string, params utils.HAProxyParams, sd *lib.Shutdown) (*haConfig, error) {
 	cfg := &haConfig{}
 
 	sd.Add(1)

@@ -151,7 +151,7 @@ func main() {
 		}
 	}()
 
-	hap := haproxy.New(consulClient, watcher.C, haproxy.Options{
+	hap := haproxy.New(consulClient, watcher.C, utils.Options{
 		HAProxyBin:           *haproxyBin,
 		DataplaneBin:         *dataplaneBin,
 		ConfigBaseDir:        *haproxyCfgBasePath,

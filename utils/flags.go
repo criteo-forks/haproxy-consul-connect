@@ -3,8 +3,6 @@ package utils
 import (
 	"fmt"
 	"strings"
-
-	"github.com/haproxytech/haproxy-consul-connect/haproxy"
 )
 
 type StringSliceFlag []string
@@ -18,8 +16,8 @@ func (i *StringSliceFlag) Set(value string) error {
 	return nil
 }
 
-func MakeHAProxyParams(flags StringSliceFlag) (haproxy.HAProxyParams, error) {
-	params := haproxy.HAProxyParams{
+func MakeHAProxyParams(flags StringSliceFlag) (HAProxyParams, error) {
+	params := HAProxyParams{
 		Defaults: map[string]string{},
 		Globals:  map[string]string{},
 	}

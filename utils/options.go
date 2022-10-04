@@ -1,4 +1,4 @@
-package haproxy
+package utils
 
 type HAProxyParams struct {
 	Defaults map[string]string

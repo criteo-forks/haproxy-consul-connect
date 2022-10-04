@@ -11,13 +11,14 @@ import (
 	"github.com/haproxytech/haproxy-consul-connect/haproxy/state"
 	"github.com/haproxytech/haproxy-consul-connect/haproxy/stats"
 	"github.com/haproxytech/haproxy-consul-connect/lib"
+	"github.com/haproxytech/haproxy-consul-connect/utils"
 	"github.com/hashicorp/consul/api"
 	log "github.com/sirupsen/logrus"
 	"gopkg.in/mcuadros/go-syslog.v2"
 )
 
 type HAProxy struct {
-	opts            Options
+	opts            utils.Options
 	dataplaneClient *dataplane.Dataplane
 	consulClient    *api.Client
 
@@ -31,7 +32,7 @@ type HAProxy struct {
 	Ready chan struct{}
 }
 
-func New(consulClient *api.Client, cfg chan consul.Config, opts Options) *HAProxy {
+func New(consulClient *api.Client, cfg chan consul.Config, opts utils.Options) *HAProxy {
 	if opts.HAProxyBin == "" {
 		opts.HAProxyBin = haproxy_cmd.DefaultHAProxyBin
 	}

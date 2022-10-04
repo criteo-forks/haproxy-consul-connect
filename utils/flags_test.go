@@ -3,7 +3,6 @@ package utils
 import (
 	"testing"
 
-	"github.com/haproxytech/haproxy-consul-connect/haproxy"
 	"github.com/stretchr/testify/require"
 )
 
@@ -18,7 +17,7 @@ func TestMakeHAProxyParams(t *testing.T) {
 	r, err := MakeHAProxyParams(flags)
 	require.NoError(t, err)
 
-	require.Equal(t, haproxy.HAProxyParams{
+	require.Equal(t, HAProxyParams{
 		Defaults: map[string]string{
 			"test.with.dots": "3",
 			"another":        "abdc",
