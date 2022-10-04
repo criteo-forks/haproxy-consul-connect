@@ -1,4 +1,4 @@
-package main
+package utils
 
 import (
 	"fmt"
@@ -7,18 +7,18 @@ import (
 	"github.com/haproxytech/haproxy-consul-connect/haproxy"
 )
 
-type stringSliceFlag []string
+type StringSliceFlag []string
 
-func (i *stringSliceFlag) String() string {
+func (i *StringSliceFlag) String() string {
 	return ""
 }
 
-func (i *stringSliceFlag) Set(value string) error {
+func (i *StringSliceFlag) Set(value string) error {
 	*i = append(*i, value)
 	return nil
 }
 
-func makeHAProxyParams(flags stringSliceFlag) (haproxy.HAProxyParams, error) {
+func MakeHAProxyParams(flags StringSliceFlag) (haproxy.HAProxyParams, error) {
 	params := haproxy.HAProxyParams{
 		Defaults: map[string]string{},
 		Globals:  map[string]string{},

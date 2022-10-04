@@ -1,4 +1,4 @@
-package main
+package utils
 
 import (
 	"testing"
@@ -8,14 +8,14 @@ import (
 )
 
 func TestMakeHAProxyParams(t *testing.T) {
-	flags := stringSliceFlag{
+	flags := StringSliceFlag{
 		"defaults.test.with.dots=3",
 		"defaults.another=abdc",
 		"global.with.spaces=hey I have spaces",
 		"global.with.dots=hey.I.have.dots",
 	}
 
-	r, err := makeHAProxyParams(flags)
+	r, err := MakeHAProxyParams(flags)
 	require.NoError(t, err)
 
 	require.Equal(t, haproxy.HAProxyParams{

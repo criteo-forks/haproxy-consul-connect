@@ -11,6 +11,7 @@ import (
 	haproxy "github.com/haproxytech/haproxy-consul-connect/haproxy"
 	"github.com/haproxytech/haproxy-consul-connect/haproxy/haproxy_cmd"
 	"github.com/haproxytech/haproxy-consul-connect/lib"
+	"github.com/haproxytech/haproxy-consul-connect/utils"
 
 	"github.com/hashicorp/consul/api"
 
@@ -60,7 +61,7 @@ func validateRequirements(dataplaneBin, haproxyBin string) error {
 }
 
 func main() {
-	haproxyParamsFlag := stringSliceFlag{}
+	haproxyParamsFlag := utils.StringSliceFlag{}
 
 	flag.Var(&haproxyParamsFlag, "haproxy-param", "Global or defaults Haproxy config parameter to set in config. Can be specified multiple times. Must be of the form `defaults.name=value` or `global.name=value`")
 	versionFlag := flag.Bool("version", false, "Show version and exit")
@@ -136,7 +137,7 @@ func main() {
 		log.Fatalf("Please specify -sidecar-for or -sidecar-for-tag")
 	}
 
-	haproxyParams, err := makeHAProxyParams(haproxyParamsFlag)
+	haproxyParams, err := utils.MakeHAProxyParams(haproxyParamsFlag)
 	if err != nil {
 		log.Fatal(err)
 	}
