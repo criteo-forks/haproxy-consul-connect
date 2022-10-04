@@ -14,6 +14,7 @@ import (
 	"github.com/haproxytech/haproxy-consul-connect/consul"
 	haproxy "github.com/haproxytech/haproxy-consul-connect/haproxy"
 	"github.com/haproxytech/haproxy-consul-connect/lib"
+	"github.com/haproxytech/haproxy-consul-connect/utils"
 	"github.com/hashicorp/consul/agent"
 	"github.com/hashicorp/consul/api"
 	"github.com/hashicorp/consul/testrpc"
@@ -72,7 +73,7 @@ func startConnectService(t *testing.T, sd *lib.Shutdown, client *api.Client, reg
 		}
 	}()
 
-	sourceHap := haproxy.New(client, watcher.C, haproxy.Options{
+	sourceHap := haproxy.New(client, watcher.C, utils.Options{
 		EnableIntentions: true,
 		HAProxyBin:       os.Getenv("HAPROXY"),
 		DataplaneBin:     os.Getenv("DATAPLANEAPI"),
