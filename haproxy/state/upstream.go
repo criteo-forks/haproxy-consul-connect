@@ -49,6 +49,17 @@ func generateUpstream(opts Options, certStore CertificateStore, cfg consul.Upstr
 		}
 	}
 
+	// Connect name header
+	if opts.ResponseHdrName != "" && feMode == models.FrontendModeHTTP {
+		fmt.Printf("header setting upstream")
+		fe.HTTPResponseRules = append(fe.HTTPResponseRules, models.HTTPResponseRule{
+			Index:     int64p(0),
+			Type:      models.HTTPResponseRuleTypeSetHeader,
+			HdrName:   opts.ResponseHdrName,
+			HdrFormat: "true",
+		})
+	}
+
 	newState.Frontends = append(newState.Frontends, fe)
 
 	be := Backend{

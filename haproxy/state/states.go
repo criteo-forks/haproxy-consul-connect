@@ -19,6 +19,7 @@ type Options struct {
 	LogSocket        string
 	SPOEConfigPath   string
 	SPOESocket       string
+	ResponseHdrName  string
 }
 
 type CertificateStore interface {
@@ -38,6 +39,7 @@ type HAProxy interface {
 	CreateTCPRequestRule(parentType, parentName string, rule models.TCPRequestRule) error
 	CreateLogTargets(parentType, parentName string, rule models.LogTarget) error
 	CreateHTTPRequestRule(parentType, parentName string, rule models.HTTPRequestRule) error
+	CreateHTTPResponseRule(parentType, parentName string, rule models.HTTPResponseRule) error
 }
 
 func Generate(opts Options, certStore CertificateStore, oldState State, cfg consul.Config) (State, error) {

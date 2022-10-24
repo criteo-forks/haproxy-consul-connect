@@ -74,6 +74,7 @@ func main() {
 	haproxyCfgBasePath := flag.String("haproxy-cfg-base-path", "/tmp", "Haproxy binary path")
 	statsListenAddr := flag.String("stats-addr", "", "Listen addr for stats server")
 	statsServiceRegister := flag.Bool("stats-service-register", false, "Register a consul service for connect stats")
+	responseHdrName := flag.String("response-hdr", "", "Header name for a response header added to each request to track if it went through successfully. The value of that header is 'true'")
 	enableIntentions := flag.Bool("enable-intentions", false, "Enable Connect intentions")
 	token := flag.String("token", "", "Consul ACL token")
 	flag.Parse()
@@ -160,6 +161,7 @@ func main() {
 		StatsRegisterService: *statsServiceRegister,
 		LogRequests:          ll == log.TraceLevel,
 		HAProxyParams:        haproxyParams,
+		ResponseHdrName:      *responseHdrName,
 	})
 	sd.Add(1)
 	go func() {

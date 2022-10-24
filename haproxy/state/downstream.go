@@ -78,6 +78,17 @@ func generateDownstream(opts Options, certStore CertificateStore, cfg consul.Dow
 		}
 	}
 
+	// Connect name header
+	if opts.ResponseHdrName != "" && feMode == models.FrontendModeHTTP {
+		fmt.Printf("header setting downstream")
+		fe.HTTPResponseRules = append(fe.HTTPResponseRules, models.HTTPResponseRule{
+			Index:     int64p(0),
+			Type:      models.HTTPResponseRuleTypeSetHeader,
+			HdrName:   opts.ResponseHdrName,
+			HdrFormat: "true",
+		})
+	}
+
 	state.Frontends = append(state.Frontends, fe)
 
 	var forwardFor *models.Forwardfor

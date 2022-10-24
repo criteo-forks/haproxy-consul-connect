@@ -104,6 +104,7 @@ func (h *HAProxy) watch(sd *lib.Shutdown) error {
 			LogSocket:        h.haConfig.LogsSock,
 			SPOEConfigPath:   h.haConfig.SPOE,
 			SPOESocket:       h.haConfig.SPOESock,
+			ResponseHdrName:  h.opts.ResponseHdrName,
 		}, h.haConfig, currentState, currentConfig)
 		if err != nil {
 			log.Error(err)

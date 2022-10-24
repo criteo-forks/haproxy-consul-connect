@@ -35,4 +35,5 @@ type Options struct {
 	StatsRegisterService bool
 	LogRequests          bool
 	HAProxyParams        HAProxyParams
+	ResponseHdrName      string
 }

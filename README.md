@@ -37,6 +37,8 @@ Usage of ./haproxy-consul-connect:
     	Consul agent address (default "127.0.0.1:8500")
   -log-level string
     	Log level (default "INFO")
+  -response-hdr string
+      Header name for a response header added to each request to track if it went through successfully. The value of that header is 'true'
   -sidecar-for string
     	The consul service id to proxy
   -sidecar-for-tag string

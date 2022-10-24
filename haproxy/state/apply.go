@@ -88,6 +88,11 @@ func applyFrontends(ha HAProxy, old, new []Frontend) error {
 				return err
 			}
 		}
+
+		for _, r := range newUp.HTTPResponseRules {
+			err = ha.CreateHTTPResponseRule("frontend", newUp.Frontend.Name, r)
+		}
+
 	}
 
 	return nil
