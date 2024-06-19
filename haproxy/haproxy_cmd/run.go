@@ -124,7 +124,7 @@ func CheckEnvironment(dataplaneapiBin, haproxyBin string) error {
 	var err error
 	wg := &sync.WaitGroup{}
 	wg.Add(2)
-	ensureVersion := func(path, minVer string) {
+	ensureVersion := func(path, minVer string, maxVer string) {
 		defer wg.Done()
 		currVer, e := getVersion(path)
 		if e != nil {
@@ -140,9 +140,18 @@ func CheckEnvironment(dataplaneapiBin, haproxyBin string) error {
 			err = fmt.Errorf("%s version must be > %s, but is: %s", path, minVer, currVer)
 			return
 		}
+		res, e = compareVersion(currVer, maxVer)
+		if e != nil {
+			err = e
+			return
+		}
+		if res > 0 {
+			err = fmt.Errorf("%s version must be < %s, but is: %s", path, maxVer, currVer)
+			return
+		}
 	}
-	go ensureVersion(haproxyBin, "2.0")
-	go ensureVersion(dataplaneapiBin, "2.1")
+	go ensureVersion(dataplaneapiBin, "2.1", "3.0")
+	go ensureVersion(haproxyBin, "2.0", "4.0")
 
 	wg.Wait()
 	if err != nil {
@@ -153,7 +162,6 @@ func CheckEnvironment(dataplaneapiBin, haproxyBin string) error {
 
 // compareVersion compares two semver versions.
 // If v1 > v2 returns 1, if v1 < v2 returns -1, if equal returns 0.
-// If major versions are not the same, returns -1.
 // If an error occurs, returns -1 and error.
 func compareVersion(v1, v2 string) (int, error) {
 	a := strings.Split(v1, ".")
@@ -188,14 +196,6 @@ func compareVersion(v1, v2 string) (int, error) {
 		fmt.Sscanf(s, "%d", &ai)
 		fmt.Sscanf(b[i], "%d", &bi)
 
-		if i == 0 {
-			//major versions should be the same
-			if ai != bi {
-				res = -1
-				break
-			}
-			continue
-		}
 		if ai > bi {
 			res = 1
 			break

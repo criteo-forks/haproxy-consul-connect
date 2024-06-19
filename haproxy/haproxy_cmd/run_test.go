@@ -17,6 +17,7 @@ func TestCompareVersion(t *testing.T) {
 		{status: 1, v1: "1.3", v2: "1.2"},
 		{status: 1, v1: "1.3.1", v2: "1.3"},
 		{status: 1, v1: "2.0.1", v2: "2.0"},
+		{status: 1, v1: "3.0", v2: "2.2.2"},
 		{status: 0, v1: "2.0", v2: "2.0"},
 		{status: 0, v1: "2.0.0", v2: "2.0"},
 		{status: 0, v1: "2.0", v2: "2.0.0"},
@@ -25,7 +26,6 @@ func TestCompareVersion(t *testing.T) {
 		{status: -1, v1: "2.0", v2: "2.0.1"},
 		{status: -1, v1: "2", v2: "2.0.1"},
 		{status: -1, v1: "2.0", v2: "2"},
-		{status: -1, v1: "3.0", v2: "2.2.2"},
 		{status: -1, v1: "2.2", v2: "3.0"},
 	}
 	for _, test := range tests {
