@@ -17,8 +17,8 @@ To handle intentions, HAProxy Connect, sets up a SPOE filter on the application 
 
 ## Requirements
 
-* HAProxy >= v1.9 (http://www.haproxy.org/)
-* DataplaneAPI >= v1.2 (https://www.haproxy.com/documentation/hapee/1-9r1/configuration/dataplaneapi/)
+* HAProxy >= v2.0 (http://www.haproxy.org/)
+* DataplaneAPI >= v2.1 (https://www.haproxy.com/documentation/hapee/1-9r1/configuration/dataplaneapi/)
 
 ## How to use
 
